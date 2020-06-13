@@ -15,7 +15,7 @@ def get_memes_urls(limit=10):
     meme_list = []
     for req_subreddit in req_subreddits:
         subreddit = reddit.subreddit(req_subreddit)
-        for submission in subreddit.top(limit=(limit//len(req_subreddits)) + 100):
+        for submission in subreddit.hot(limit=(limit//len(req_subreddits)) + 50):
             meme_list.append(
                 ["https://reddit.com" + submission.permalink, submission.title, submission.url])
         
