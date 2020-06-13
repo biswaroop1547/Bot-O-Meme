@@ -12,7 +12,7 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
                      level=logging.INFO)
 
 def start(update, context):
-    context.bot.send_message(chat_id=update.effective_chat.id, text = 'Hi! welcome to Bot-O-Meme :)\n\nThese are the available commands - \n\n/meme - Shows a meme.\n/toss - Tosses a coin.\n/means <word> - Gets you the definitions.')
+    context.bot.send_message(chat_id=update.effective_chat.id, text = 'Hi! welcome to Bot-O-Meme :)\n\nThese are the available commands - \n\n/meme - Shows a meme.\n/toss - Tosses a coin.\n/means <word> - Gets you the definitions.\n\nAnd do not to curse in my presence ;)')
 
 start_handler = CommandHandler('start', start)
 dispatcher.add_handler(start_handler)
@@ -76,6 +76,25 @@ def means(update, context):
 
 meaning_handler = CommandHandler('means', means)
 dispatcher.add_handler(meaning_handler)
+
+
+from insult import get_insult
+
+with open("hi_en_bad_words.txt", "r") as f:
+    bad_words = f.read()
+
+def echo(update, context):
+    msg = update.message.text
+    msg = msg.replace("\n", "")
+    msg_list = msg.split(" ")
+    for word in msg_list:
+        if (word in bad_words) and (len(word) > 2):    
+            context.bot.send_message(chat_id=update.effective_chat.id, text=update.effective_user.name + " " + get_insult())
+            break
+
+from telegram.ext import MessageHandler, Filters
+echo_handler = MessageHandler(Filters.text & (~Filters.command), echo)
+dispatcher.add_handler(echo_handler)
 
 
 # from telegram import InlineQueryResultArticle, InputTextMessageContent
