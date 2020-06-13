@@ -1,5 +1,6 @@
 from telegram.ext import Updater, CommandHandler
 import logging
+import random
 
 updater = Updater(token='1128728650:AAFPELrFHtNnuVpN_0nG___iuzvk7PJyDBo', use_context = True)
 
@@ -11,7 +12,7 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
                      level=logging.INFO)
 
 def start(update, context):
-    context.bot.send_message(chat_id=update.effective_chat.id, text = 'Hi! use /meme command to see memes :)')
+    context.bot.send_message(chat_id=update.effective_chat.id, text = 'Hi! welcome to Bot-O-Meme :)\n\nThese are the available commands - \n\n/meme - Shows a meme.\n/toss - tosses a coin.')
 
 start_handler = CommandHandler('start', start)
 dispatcher.add_handler(start_handler)
@@ -47,6 +48,34 @@ def meme(update, context):
 
 meme_handler = CommandHandler('meme', meme)
 dispatcher.add_handler(meme_handler)
+
+def toss(update, context):
+    coin = {0 : "Heads", 1 : 'Tails'}
+    index = random.randint(0, 1)
+    context.bot.send_message(chat_id=update.effective_chat.id, text= coin[index].upper() + '!!')
+
+toss_handler = CommandHandler('toss', toss)
+dispatcher.add_handler(toss_handler)
+
+
+from dictionary_requests import get_meanings
+
+def means(update, context):
+    meaning_to_find_text = ' '.join(context.args).lower()
+    try:
+        meaning = get_meanings(meaning_to_find_text)
+    except KeyError:
+        meaning = ["Sorry no definitions found."]
+
+    if len(meaning) > 1:
+        meaning = '.\n\nor\n'.join(meaning)
+    else:
+        meaning = meaning[0]
+
+    context.bot.send_message(chat_id=update.effective_chat.id, text=meaning_to_find_text + " means -\n\n" + meaning + ".")
+
+meaning_handler = CommandHandler('means', means)
+dispatcher.add_handler(meaning_handler)
 
 
 # from telegram import InlineQueryResultArticle, InputTextMessageContent
