@@ -12,7 +12,7 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
                      level=logging.INFO)
 
 def start(update, context):
-    context.bot.send_message(chat_id=update.effective_chat.id, text = 'Hi! welcome to Bot-O-Meme :)\n\nThese are the available commands - \n\n/meme - Shows a meme.\n/toss - tosses a coin.\n/means <word> - Gets you the definitions.')
+    context.bot.send_message(chat_id=update.effective_chat.id, text = 'Hi! welcome to Bot-O-Meme :)\n\nThese are the available commands - \n\n/meme - Shows a meme.\n/toss - Tosses a coin.\n/means <word> - Gets you the definitions.')
 
 start_handler = CommandHandler('start', start)
 dispatcher.add_handler(start_handler)
