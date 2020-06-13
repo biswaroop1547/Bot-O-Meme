@@ -88,7 +88,7 @@ def echo(update, context):
     msg = msg.replace("\n", "")
     msg_list = msg.split(" ")
     for word in msg_list:
-        if (word in bad_words) and (len(word) > 2):    
+        if (word in bad_words) and (len(word) > 2) and (word != 'the'):    
             context.bot.send_message(chat_id=update.effective_chat.id, text=update.effective_user.name + " " + get_insult())
             break
 
