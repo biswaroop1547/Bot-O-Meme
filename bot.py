@@ -88,7 +88,7 @@ def echo(update, context):
     msg = msg.replace("\n", "")
     msg_list = msg.split(" ")
     for word in msg_list:
-        if (word.lower() in bad_words.lower()) and (len(word) > 3) and (word.lower() not in 'sister_brother_bhai_problem'):    
+        if (word.lower() in bad_words.lower()) and (len(word) > 3) and (word.lower() not in 'sister_brother_bhai_problem_kaha'):    
             context.bot.send_message(chat_id=update.effective_chat.id, text=update.effective_user.name + " " + get_insult())
             break
 
