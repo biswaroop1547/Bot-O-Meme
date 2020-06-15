@@ -6,35 +6,26 @@ updater = Updater(token='1128728650:AAFPELrFHtNnuVpN_0nG___iuzvk7PJyDBo', use_co
 
 dispatcher = updater.dispatcher
 
-# print(dispatcher)
-
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                      level=logging.INFO)
 
+
+
 def start(update, context):
-    context.bot.send_message(chat_id=update.effective_chat.id, text = 'Hi! welcome to Bot-O-Meme :)\n\nThese are the available commands - \n\n/meme - Shows a meme.\n/toss - Tosses a coin.\n/means <word> - Gets you the definitions.\n\nAnd do not to curse in my presence ;)')
+    context.bot.send_message(chat_id=update.effective_chat.id, text = 'Hi! welcome to Bot-O-Meme :) \
+                                                                        \n\nThese are the available commands - \
+                                                                        \n\n/meme - Shows a meme. \
+                                                                        \n/toss - Tosses a coin. \
+                                                                        \n/means <word> - Gets you the definitions. \
+                                                                        \n/google <query string> - Gets you the top 10 google search results.                                            \
+                                                                        \n\nAnd do not to curse in my presence ;)')
 
 start_handler = CommandHandler('start', start)
 dispatcher.add_handler(start_handler)
 
-# def echo(update, context):
-#     context.bot.send_message(chat_id=update.effective_chat.id, text=update.message.text)
-
-# from telegram.ext import MessageHandler, Filters
-# echo_handler = MessageHandler(Filters.text & (~Filters.command), echo)
-# dispatcher.add_handler(echo_handler)
-
-
-# def caps(update, context):
-#     text_in_caps = ' '.join(context.args).upper()
-#     context.bot.send_message(chat_id=update.effective_chat.id, text=text_in_caps)
-
-# caps_handler = CommandHandler('caps', caps)
-# dispatcher.add_handler(caps_handler)
 
 
 from make_requests import get_memes_urls
-
 
 def meme(update, context):
     url_caption_list = get_memes_urls(limit=1)
@@ -84,7 +75,7 @@ with open("hi_en_bad_words.txt", "r") as f:
     bad_words = f.readlines()
     bad_words = [words.replace("\n", "") for words in bad_words]
     # print(len(bad_words))
-def echo(update, context):
+def insult_func(update, context):
     msg = update.message.text
     msg = msg.replace("\n", "")
     msg_list = msg.split(" ")
@@ -94,8 +85,21 @@ def echo(update, context):
             break
 
 from telegram.ext import MessageHandler, Filters
-echo_handler = MessageHandler(Filters.text & (~Filters.command), echo)
-dispatcher.add_handler(echo_handler)
+insult_handler = MessageHandler(Filters.text & (~Filters.command), insult_func)
+dispatcher.add_handler(insult_handler)
+
+
+from google_search import get_query_links
+def google(update, context):
+    search_query = ' '.join(context.args)
+    try:
+        links = get_query_links(search_query)
+        context.bot.send_message(chat_id=update.effective_chat.id, text="Google results for " + search_query + " :\n\n" + "\n\n".join(str(i) + ". " + link for i, link in enumerate(links)))
+    except Exception as e:
+        context.bot.send_message(chat_id=update.effective_chat.id, text="Sorry, an unknown error occurred...")
+
+google_handler = CommandHandler('google', google)
+dispatcher.add_handler(google_handler)
 
 
 # from telegram import InlineQueryResultArticle, InputTextMessageContent
