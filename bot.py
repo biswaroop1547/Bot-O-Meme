@@ -18,7 +18,7 @@ def start(update, context):
                                                                         \n/toss - Tosses a coin. \
                                                                         \n/means <word> - Gets you the definitions. \
                                                                         \n/google <query string> - Gets you the top 10 google search results.                                            \
-                                                                        \n\nAnd do not to curse in my presence ;)')
+                                                                        \n\nAnd do not curse in my presence ;)')
 
 start_handler = CommandHandler('start', start)
 dispatcher.add_handler(start_handler)
