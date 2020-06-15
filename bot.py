@@ -80,7 +80,8 @@ def insult_func(update, context):
     msg = msg.replace("\n", "")
     msg_list = msg.split(" ")
     for word in msg_list:
-        if (word.lower() in [bad_word.lower() for bad_word in bad_words]) and (len(word) > 2):    
+        bad_word_list = [bad_word.lower() == word.lower() for bad_word in bad_words]
+        if (sum(bad_word_list)) and (len(word) > 2):    
             context.bot.send_message(chat_id=update.effective_chat.id, text=update.effective_user.name + " " + get_insult())
             break
 
