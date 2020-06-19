@@ -18,7 +18,7 @@ def start(update, context):
                                                                         \n/toss - Tosses a coin. \
                                                                         \n/means <word> - Gets you the definitions. \
                                                                         \n/google <query string> - Gets you the top 10 google search results.                                            \
-                                                                        \n\nAnd do not curse in my presence ;)')
+                                                                        \n\nAnd yeah you can curse -_-')
 
 start_handler = CommandHandler('start', start)
 dispatcher.add_handler(start_handler)
@@ -69,25 +69,25 @@ meaning_handler = CommandHandler('means', means)
 dispatcher.add_handler(meaning_handler)
 
 
-from insult import get_insult
+# from insult import get_insult
 
-with open("hi_en_bad_words.txt", "r") as f:
-    bad_words = f.readlines()
-    bad_words = [words.replace("\n", "") for words in bad_words]
+# with open("hi_en_bad_words.txt", "r") as f:
+#     bad_words = f.readlines()
+#     bad_words = [words.replace("\n", "") for words in bad_words]
     # print(len(bad_words))
-def insult_func(update, context):
-    msg = update.message.text
-    msg = msg.replace("\n", "")
-    msg_list = msg.split(" ")
-    for word in msg_list:
-        bad_word_list = [bad_word.lower() == word.lower() for bad_word in bad_words]
-        if (sum(bad_word_list)) and (len(word) > 2):    
-            context.bot.send_message(chat_id=update.effective_chat.id, text=update.effective_user.name + " " + get_insult())
-            break
+# def insult_func(update, context):
+#     msg = update.message.text
+#     msg = msg.replace("\n", "")
+#     msg_list = msg.split(" ")
+#     for word in msg_list:
+#         bad_word_list = [bad_word.lower() == word.lower() for bad_word in bad_words]
+#         if (sum(bad_word_list)) and (len(word) > 2):    
+#             context.bot.send_message(chat_id=update.effective_chat.id, text=update.effective_user.name + " " + get_insult())
+#             break
 
-from telegram.ext import MessageHandler, Filters
-insult_handler = MessageHandler(Filters.text & (~Filters.command), insult_func)
-dispatcher.add_handler(insult_handler)
+# from telegram.ext import MessageHandler, Filters
+# insult_handler = MessageHandler(Filters.text & (~Filters.command), insult_func)
+# dispatcher.add_handler(insult_handler)
 
 
 from google_search import get_query_links
