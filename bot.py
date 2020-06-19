@@ -69,12 +69,12 @@ meaning_handler = CommandHandler('means', means)
 dispatcher.add_handler(meaning_handler)
 
 
-# from insult import get_insult
+from insult_req import get_insult
 
 # with open("hi_en_bad_words.txt", "r") as f:
 #     bad_words = f.readlines()
 #     bad_words = [words.replace("\n", "") for words in bad_words]
-    # print(len(bad_words))
+#     print(len(bad_words))
 # def insult_func(update, context):
 #     msg = update.message.text
 #     msg = msg.replace("\n", "")
@@ -88,6 +88,19 @@ dispatcher.add_handler(meaning_handler)
 # from telegram.ext import MessageHandler, Filters
 # insult_handler = MessageHandler(Filters.text & (~Filters.command), insult_func)
 # dispatcher.add_handler(insult_handler)
+
+
+def google(update, context):
+    person_tag = ' '.join(context.args)
+    try:
+        insult_text = get_insult()
+        context.bot.send_message(chat_id=update.effective_chat.id, text= person_tag + " " + insult_text)
+    except Exception as e:
+        context.bot.send_message(chat_id=update.effective_chat.id, text="Sorry, an unknown error occurred...")
+
+insult_command_handler = CommandHandler('google', google)
+dispatcher.add_handler(insult_command_handler)
+
 
 
 from google_search import get_query_links
