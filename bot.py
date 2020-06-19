@@ -18,7 +18,7 @@ def start(update, context):
                                                                         \n/toss - Tosses a coin. \
                                                                         \n/means <word> - Gets you the definitions. \
                                                                         \n/google <query string> - Gets you the top 10 google search results.                                            \
-                                                                        \n\nAnd yeah you can curse -_-')
+                                                                        \n\n/insult <tag> - insults the tagged user.')
 
 start_handler = CommandHandler('start', start)
 dispatcher.add_handler(start_handler)
@@ -91,8 +91,8 @@ from insult_req import get_insult
 
 
 def insult(update, context):
-    person_tag = ' '.join(context.args)
     try:
+        person_tag = ' '.join(context.args)
         insult_text = get_insult()
         context.bot.send_message(chat_id=update.effective_chat.id, text= person_tag + " " + insult_text)
     except Exception as e:
