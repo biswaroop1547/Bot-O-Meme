@@ -90,7 +90,7 @@ from insult_req import get_insult
 # dispatcher.add_handler(insult_handler)
 
 
-def google(update, context):
+def insult(update, context):
     person_tag = ' '.join(context.args)
     try:
         insult_text = get_insult()
@@ -98,7 +98,7 @@ def google(update, context):
     except Exception as e:
         context.bot.send_message(chat_id=update.effective_chat.id, text="Sorry, an unknown error occurred...")
 
-insult_command_handler = CommandHandler('google', google)
+insult_command_handler = CommandHandler('insult', insult)
 dispatcher.add_handler(insult_command_handler)
 
 
