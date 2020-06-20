@@ -3,10 +3,16 @@ import json
 import urllib.request
 import praw
 import random
+import os
 
-reddit = praw.Reddit(client_id='lIwhm8aNKKH4BQ',
-                     client_secret='VrI0rAVzIeOuZVV_SYiR0jXZiA4',
-                     user_agent='bot-o-meme by TheWizzy1547')
+PRAW_CLIENT_ID = os.environ['PRAW_CLIENT_ID']
+PRAW_CLIENT_SECRET = os.environ['PRAW_CLIENT_SECRET']
+PRAW_USERAGENT = os.environ['PRAW_USERAGENT']
+
+
+reddit = praw.Reddit(client_id=PRAW_CLIENT_ID,
+                     client_secret=PRAW_CLIENT_SECRET,
+                     user_agent=PRAW_USERAGENT)
 
 
 def get_memes_urls(limit=10):

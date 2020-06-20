@@ -5,7 +5,9 @@ from insult_req import get_insult
 from google_search import get_query_links
 import logging
 import random
+import os
 
+TELEGRAM_BOT_TOKEN = os.environ['TELEGRAM_BOT_TOKEN']
 
 ##########################################################################################
 #insult getting triggered by what's there in the text automatically
@@ -94,7 +96,7 @@ def google(update, context):
 
 
 if __name__ == '__main__':
-    updater = Updater(token='1128728650:AAFPELrFHtNnuVpN_0nG___iuzvk7PJyDBo', use_context = True)
+    updater = Updater(token=TELEGRAM_BOT_TOKEN, use_context = True)
     dispatcher = updater.dispatcher
 
     logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',

@@ -1,10 +1,14 @@
 
 import requests
 import json
+import os
+
+DICT_APP_ID = os.environ['DICT_APP_ID']
+DICT_APP_KEY = os.environ['DICT_APP_KEY']
 
 def get_meanings(word):
-    app_id = "84c0eb6b "
-    app_key = "09a6a7a32ef4d5853e699301786c8548"
+    app_id = DICT_APP_ID
+    app_key = DICT_APP_KEY
     language = "en-gb"
     endpoint = "entries"
     word_id = word
