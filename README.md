@@ -16,7 +16,7 @@ Also has different commands
 
 * ```/google``` <query string> - Gets you the top 10 google search results.
 
-* ```/insult <tag> - insults the tagged user.
+* ```/insult``` <tag> - insults the tagged user.
 
 * It can also insult the user if it detects any vulgar words in the chat
 ***
