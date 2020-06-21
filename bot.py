@@ -141,6 +141,6 @@ if __name__ == '__main__':
     dispatcher.add_handler(google_handler)
 
     fake_word_handler = CommandHandler('fake_word', fake_word)
-    dispatcher.add_handler(fake_word)
+    dispatcher.add_handler(fake_word_handler)
 
     updater.start_polling()
