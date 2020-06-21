@@ -112,7 +112,7 @@ def fake_word(update, context):
     else:
         exists = "This word probably exists"
 
-    context.bot.send_message(chat_id=update.effective_chat.id, text="Word: " + word + NEWLINE + "Definition: " + definition + NEWLINE + "Example: " + example + NEWLINE + exists + NEWLINE)
+    context.bot.send_message(chat_id=update.effective_chat.id, text="Word: " + word + NEWLINE + "Definition: " + definition + NEWLINE + "Example: " + example + NEWLINE + NEWLINE + exists)
 
 
 if __name__ == '__main__':
