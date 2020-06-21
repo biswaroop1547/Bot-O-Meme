@@ -3,9 +3,13 @@ from make_requests import get_memes_urls
 from dictionary_requests import get_meanings
 from insult_req import get_insult
 from google_search import get_query_links
+from word_does_not_exist import this_word_does_not_exist
 import logging
 import random
 import os
+
+NEWLINE = "\n"
+WHITESPACE = " "
 
 TELEGRAM_BOT_TOKEN = os.environ['TELEGRAM_BOT_TOKEN']
 
@@ -94,6 +98,21 @@ def google(update, context):
         context.bot.send_message(chat_id=update.effective_chat.id, text="Sorry, an unknown error occurred...")
 
 
+def fake_word(update, context):
+    fake_word_data = this_word_does_not_exist()
+    
+    word = fake_word_data['word']
+    definition = fake_word_data['definition']
+    example = fake_word_data['example']
+    exists = fake_word_data['exists']
+    
+    if exists is False:
+        exists = "This word probably doesn't exists"
+    else:
+        exists = "This word probably exists"
+
+    context.bot.send_message(chat_id=update.effective_chat.id, text="Word: " + word + NEWLINE + "Definition: " + definition + NEWLINE + "Example: " + example + NEWLINE + exists + NEWLINE)
+
 
 if __name__ == '__main__':
     updater = Updater(token=TELEGRAM_BOT_TOKEN, use_context = True)
@@ -119,5 +138,8 @@ if __name__ == '__main__':
 
     google_handler = CommandHandler('google', google)
     dispatcher.add_handler(google_handler)
+
+    fake_word_handler = CommandHandler('fake_word', fake_word)
+    dispatcher.add_handler(fake_word)
 
     updater.start_polling()
