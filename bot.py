@@ -41,7 +41,8 @@ def start(update, context):
                                                                         \n\n/meme - Shows a meme. \
                                                                         \n/toss - Tosses a coin. \
                                                                         \n/means <word> - Gets you the definitions. \
-                                                                        \n/google <query string> - Gets you the top 10 google search results.                                            \
+                                                                        \n/google <query string> - Gets you the top 10 google search results. \
+                                                                        \n/fake_word - It will show you a fake word with detailed info which looks real. \
                                                                         \n\n/insult <tag> - insults the tagged user.')
 
 
